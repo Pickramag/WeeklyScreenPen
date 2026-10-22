@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="assets/logo.png" width="130" height="130" alt="Weekly Screen Pen Logo" />
+  <img src="assets/WeeklyPen.png" width="130" height="130" alt="Weekly Screen Pen Logo" />
 
   # Weekly Screen Pen
 
