@@ -12,7 +12,7 @@
     <a href="https://t.me/weekgamesdev">
       <img src="https://img.shields.io/badge/TELEGRAM-КАНАЛ-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram" />
     </a>
-    <a href="https://github.com/Pickramag/Weekly-Screen-Pen/releases/latest">
+    <a href="https://github.com/Pickramag/WeeklyScreenPen/releases/latest">
       <img src="https://img.shields.io/badge/СКАЧАТЬ-LATEST_EXE-0078D7?style=for-the-badge&logo=windows&logoColor=white" alt="Скачать" />
     </a>
   </p>
@@ -117,7 +117,7 @@ build.ps1                    # PowerShell-скрипт публикации ре
 ### 💬 Обратная связь & Сообщество
 
 - 📢 Telegram-канал разработчика: [@weekgamesdev](https://t.me/weekgamesdev)
-- 🐛 Баг-репорты и предложения: [GitHub Issues](https://github.com/Pickramag/Weekly-Screen-Pen/issues)
+- 🐛 Баг-репорты и предложения: [GitHub Issues](https://github.com/Pickramag/WeeklyScreenPen/issues)
 
 ---
 
