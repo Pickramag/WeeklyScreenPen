@@ -1,0 +1,13 @@
+<Window x:Class="WeeklyScreenPen.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WeeklyScreenPen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="#01000000"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Focusable="True">
+    <Canvas x:Name="Surface" ClipToBounds="True" />
+</Window>

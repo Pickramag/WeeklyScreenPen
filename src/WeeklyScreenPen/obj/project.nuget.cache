@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "V8STy21GHwU=",
+  "success": true,
+  "projectFilePath": "D:\\Моиприложенияиразработки\\WeeklyScreenPen\\src\\WeeklyScreenPen\\WeeklyScreenPen.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.15\\microsoft.net.illink.tasks.8.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}

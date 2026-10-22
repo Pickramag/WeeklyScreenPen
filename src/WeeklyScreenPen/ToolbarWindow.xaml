@@ -1,0 +1,410 @@
+<Window x:Class="WeeklyScreenPen.ToolbarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:WeeklyScreenPen.Core"
+        Title="WeeklyScreenPen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
+
+    <Window.Resources>
+
+        <core:SizePreviewConverter x:Key="SizePreview" />
+
+        <!-- Round icon button (ToggleButton) -->
+        <Style x:Key="ToolButton" TargetType="ToggleButton">
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground" Value="#C9FFFFFF" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="B"
+                                CornerRadius="9"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#1AFFFFFF" />
+                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#6366F1" />
+                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Round icon button (Button) -->
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Foreground" Value="#C9FFFFFF" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="B"
+                                CornerRadius="9"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#1AFFFFFF" />
+                                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#40FFFFFF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Color swatch -->
+        <Style x:Key="Swatch" TargetType="ToggleButton">
+            <Setter Property="Width" Value="24" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Border x:Name="Ring"
+                                    CornerRadius="12"
+                                    BorderThickness="2"
+                                    BorderBrush="Transparent" />
+                            <Border CornerRadius="9"
+                                    Margin="3"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="#30000000"
+                                    BorderThickness="1" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Ring" Property="BorderBrush" Value="#66FFFFFF" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Ring" Property="BorderBrush" Value="#FFFFFFFF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Size slider -->
+        <Style x:Key="SliderRepeat" TargetType="RepeatButton">
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Height" Value="4" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="2" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SizeSlider" TargetType="Slider">
+            <Setter Property="Width" Value="130" />
+            <Setter Property="Height" Value="18" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="IsMoveToPointEnabled" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Background="Transparent">
+                            <Border Height="4"
+                                    CornerRadius="2"
+                                    Background="#26FFFFFF"
+                                    VerticalAlignment="Center" />
+                            <Track x:Name="PART_Track"
+                                   IsDirectionReversed="False"
+                                   Focusable="False">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeat}"
+                                                  Background="#6366F1"
+                                                  Command="{x:Static Slider.DecreaseLarge}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Grid>
+                                                    <Ellipse Width="15"
+                                                             Height="15"
+                                                             Fill="White"
+                                                             Stroke="#40000000"
+                                                             StrokeThickness="1" />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource SliderRepeat}"
+                                                  Background="#14FFFFFF"
+                                                  Command="{x:Static Slider.IncreaseLarge}" />
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Sep" TargetType="Border">
+            <Setter Property="Width" Value="1" />
+            <Setter Property="Background" Value="#1AFFFFFF" />
+            <Setter Property="Margin" Value="7,6" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Border x:Name="RootBorder"
+                CornerRadius="16"
+                Background="#E617171D"
+                BorderBrush="#18FFFFFF"
+                BorderThickness="1"
+                Padding="14,12">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000"
+                                  BlurRadius="32"
+                                  ShadowDepth="5"
+                                  Direction="270"
+                                  Opacity="0.55" />
+            </Border.Effect>
+
+            <StackPanel>
+
+                <!-- Row 1: mode, tools, actions, lang, close -->
+                <DockPanel LastChildFill="False" Margin="0,0,0,10">
+
+                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                        <ToggleButton x:Name="ModeButton"
+                                      Style="{StaticResource ToolButton}"
+                                      Width="42"
+                                      Foreground="White"
+                                      Click="Mode_Click">
+                            <Path x:Name="ModeIcon"
+                                  Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Data="M3,1.5 L3,14.2 L6.3,11.1 L8.4,15.7 L10.5,14.8 L8.4,10.4 L12.8,10.4 Z"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                        </ToggleButton>
+
+                        <Border Style="{StaticResource Sep}" />
+
+                        <ToggleButton x:Name="PenButton"
+                                      Style="{StaticResource ToolButton}"
+                                      Tag="Pen"
+                                      IsChecked="True"
+                                      Click="Tool_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  StrokeThickness="1.8"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  Data="M13.2,2.8 L6.2,9.8 M6.6,8.4 L8.2,10 L4.4,13.8 L2.4,14.4 L3,12.4 Z" />
+                        </ToggleButton>
+
+                        <ToggleButton x:Name="MarkerButton"
+                                      Style="{StaticResource ToolButton}"
+                                      Tag="Marker"
+                                      Click="Tool_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  StrokeThickness="2.4"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  Data="M13,3 L7.6,8.4 M7.8,6.8 L9.4,8.4 L4.6,13.2 L2.4,13.8 L3,11.6 Z" />
+                        </ToggleButton>
+
+                        <ToggleButton x:Name="HighlighterButton"
+                                      Style="{StaticResource ToolButton}"
+                                      Tag="Highlighter"
+                                      Click="Tool_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  StrokeThickness="3.4"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  Data="M13.2,3 L8.6,7.6 M8.4,5.8 L10.2,7.6 L3.4,14.4 L1.4,13.4 L2.4,11.4 Z" />
+                        </ToggleButton>
+
+                        <ToggleButton x:Name="EraserButton"
+                                      Style="{StaticResource ToolButton}"
+                                      Tag="Eraser"
+                                      Click="Tool_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                  StrokeThickness="1.4"
+                                  StrokeLineJoin="Round"
+                                  Data="M2.6,8.9 L8.7,2.8 L13.6,7.7 L7.5,13.8 L5.3,13.6 L3.6,11.9 Z M4.4,10.2 L6.2,12 L7.1,11.1 L5.3,9.3 Z" />
+                        </ToggleButton>
+
+                        <Border Style="{StaticResource Sep}" />
+
+                        <Button x:Name="UndoButton"
+                                Style="{StaticResource ActionButton}"
+                                Click="Undo_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  StrokeThickness="1.7"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  StrokeLineJoin="Round"
+                                  Data="M4.4,10.2 A5.2,5.2 0 1 1 9.2,15 M4.4,10.2 L0.8,10.2 M4.4,10.2 L4.4,6.6" />
+                        </Button>
+
+                        <Button x:Name="ClearButton"
+                                Style="{StaticResource ActionButton}"
+                                Click="Clear_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  StrokeThickness="1.5"
+                                  StrokeLineJoin="Round"
+                                  Data="M6.6,2 L9.4,2 L9.4,3.4 L13.6,3.4 L13.6,5 L12.4,14 L3.6,14 L2.4,5 L2.4,3.4 L6.6,3.4 Z M4,5 L12,5 L11.2,12.6 L4.8,12.6 Z" />
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                        <Button x:Name="LangButton"
+                                Style="{StaticResource ActionButton}"
+                                Width="38"
+                                Click="Lang_Click">
+                            <TextBlock x:Name="LangText"
+                                       FontWeight="SemiBold"
+                                       FontSize="11"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                       Text="RU" />
+                        </Button>
+
+                        <Border Style="{StaticResource Sep}" />
+
+                        <Button x:Name="CloseButton"
+                                Style="{StaticResource ActionButton}"
+                                Click="Close_Click">
+                            <Path Width="16"
+                                  Height="16"
+                                  Stretch="Uniform"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  StrokeThickness="1.6"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  Data="M4,4 L12,12 M12,4 L4,12" />
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- Row 2: palette + size -->
+                <DockPanel LastChildFill="False">
+
+                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                        <UniformGrid x:Name="SwatchHost" Rows="1" Columns="12">
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#111111" Background="#111111" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#FFFFFF" Background="#FFFFFF" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#E5484D" Background="#E5484D" IsChecked="True" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#F76B15" Background="#F76B15" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#FFC53D" Background="#FFC53D" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#30A46C" Background="#30A46C" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#12A594" Background="#12A594" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#0091FF" Background="#0091FF" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#6366F1" Background="#6366F1" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#8E4EC6" Background="#8E4EC6" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#E93D82" Background="#E93D82" Click="Swatch_Click" />
+                            <ToggleButton Style="{StaticResource Swatch}" Tag="#8E6E53" Background="#8E6E53" Click="Swatch_Click" />
+                        </UniformGrid>
+
+                        <Button x:Name="CustomColorButton"
+                                Style="{StaticResource ActionButton}"
+                                Margin="6,0,0,0"
+                                Click="Custom_Click">
+                            <Grid Width="16" Height="16">
+                                <Ellipse>
+                                    <Ellipse.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#FF3B30" Offset="0" />
+                                            <GradientStop Color="#FF9500" Offset="0.25" />
+                                            <GradientStop Color="#FFCC00" Offset="0.45" />
+                                            <GradientStop Color="#34C759" Offset="0.65" />
+                                            <GradientStop Color="#007AFF" Offset="0.85" />
+                                            <GradientStop Color="#AF52DE" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock x:Name="SizeLabel"
+                                   Margin="12,0,8,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="#9DFFFFFF"
+                                   FontSize="11"
+                                   Text="Размер" />
+                        <Slider x:Name="SizeSlider"
+                                Style="{StaticResource SizeSlider}"
+                                Minimum="1"
+                                Maximum="48"
+                                Value="4"
+                                ValueChanged="Size_ValueChanged"
+                                PreviewMouseUp="Size_Commit"
+                                PreviewKeyUp="Size_Commit" />
+                        <Ellipse x:Name="SizePreview"
+                                 Margin="10,0,0,0"
+                                 VerticalAlignment="Center"
+                                 Fill="#E5484D"
+                                 Width="4"
+                                 Height="4"
+                                 Stroke="#60000000"
+                                 StrokeThickness="1" />
+                    </StackPanel>
+                </DockPanel>
+
+                <!-- Footer: hotkeys -->
+                <TextBlock x:Name="FooterText"
+                           Margin="0,10,0,0"
+                           HorizontalAlignment="Center"
+                           FontSize="10"
+                           Foreground="#50FFFFFF"
+                           Text="Ctrl+Alt+D — режим · Ctrl+Alt+Z — отмена · Ctrl+Alt+X — очистить · Esc — очистить" />
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
