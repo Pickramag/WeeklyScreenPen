@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://api.iconify.design/fluent-emoji:fountain-pen.svg" width="130" height="130" alt="Weekly Screen Pen Logo" />
+  <img src="assets/logo.png" width="130" height="130" alt="Weekly Screen Pen Logo" />
 
   # Weekly Screen Pen
 
@@ -26,15 +26,7 @@
 
 </div>
 
----
 
-### 🖼 Скриншоты
-
-| Рисование поверх окон | Плавающая панель | Трей и меню |
-| :---: | :---: | :---: |
-| <img src="assets/preview-draw.png" width="280" alt="Режим рисования" onerror="this.src='https://placehold.co/600x380/161b22/79c0ff?text=Drawing+Overlay';" /> | <img src="assets/preview-toolbar.png" width="280" alt="Панель инструментов" onerror="this.src='https://placehold.co/600x380/161b22/79c0ff?text=Floating+Toolbar';" /> | <img src="assets/preview-tray.png" width="280" alt="Меню в трее" onerror="this.src='https://placehold.co/600x380/161b22/79c0ff?text=System+Tray';" /> |
-
----
 
 ### ⚙️ Возможности
 
